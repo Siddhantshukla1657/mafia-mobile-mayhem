@@ -49,7 +49,7 @@ export const NightPhase: React.FC = () => {
   }
   
   return (
-    <div>
+    <div className="container mx-auto px-4 py-6 flex flex-col items-center justify-center min-h-[70vh]">
       <h1 className="text-2xl font-bold text-center text-mafia-primary mb-6">
         Night {currentRound} - {currentPlayer.name}'s Turn
       </h1>

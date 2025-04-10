@@ -108,9 +108,9 @@ export const RoleCard: React.FC<RoleCardProps> = ({
   };
   
   return (
-    <div className="container mx-auto px-4 py-8 max-w-md flex items-center justify-center min-h-[70vh]">
+    <div className="w-full max-w-xs mx-auto">
       {!showTargetSelection ? (
-        <div className="card-container w-full max-w-xs perspective-1000">
+        <div className="card-container w-full perspective-1000">
           <div className={`card ${isFlipped ? 'flipped' : ''}`}>
             <div className="card-front">
               <Card className="w-full h-80 flex flex-col items-center justify-center bg-mafia-card border-2 border-mafia-primary cursor-pointer shadow-xl hover:shadow-2xl hover:border-mafia-accent transition-all duration-300" onClick={handleFlip}>

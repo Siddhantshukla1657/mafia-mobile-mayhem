@@ -4,6 +4,8 @@ import { useGame } from '@/contexts/GameContext';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skull, User } from 'lucide-react';
+import { MagnifyingGlass } from './icons/MagnifyingGlass';
+import { Heart } from './icons/Heart';
 
 export const GameOver: React.FC = () => {
   const { state, dispatch } = useGame();
@@ -118,7 +120,3 @@ export const GameOver: React.FC = () => {
     </div>
   );
 };
-
-// Import MagnifyingGlass and Heart icons
-import { MagnifyingGlass } from './icons/MagnifyingGlass';
-import { Heart } from './icons/Heart';

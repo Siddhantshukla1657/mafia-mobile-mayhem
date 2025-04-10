@@ -5,7 +5,9 @@ import { Card } from "@/components/ui/card";
 import { PlayerRole } from '@/models/GameTypes';
 
 // Import Icons
-import { Skull, MagnifyingGlass, Heart, User } from 'lucide-react';
+import { Skull, User } from 'lucide-react';
+import { MagnifyingGlass } from './icons/MagnifyingGlass';
+import { Heart } from './icons/Heart';
 
 interface RoleCardProps {
   playerName: string;

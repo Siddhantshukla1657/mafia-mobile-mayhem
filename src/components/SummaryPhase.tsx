@@ -3,7 +3,9 @@ import React from 'react';
 import { useGame } from '@/contexts/GameContext';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Skull, MagnifyingGlass, Heart, Check } from 'lucide-react';
+import { Skull, Check } from 'lucide-react';
+import { MagnifyingGlass } from './icons/MagnifyingGlass';
+import { Heart } from './icons/Heart';
 
 export const SummaryPhase: React.FC = () => {
   const { state, dispatch } = useGame();

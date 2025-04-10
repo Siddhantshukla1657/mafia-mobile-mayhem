@@ -261,9 +261,13 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
         ...state,
         currentRound: state.currentRound + 1,
         gamePhase: 'night',
-        currentPlayerIndex: 0,
+        currentPlayerIndex: state.players.findIndex(player => player.isAlive),
         nightActions: [],
         roundSummary: null,
+        players: state.players.map(player => ({
+          ...player,
+          hasActed: false
+        })),
       };
     }
     

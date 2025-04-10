@@ -59,7 +59,7 @@ export const NightPhase: React.FC = () => {
         role={currentPlayer.role}
         onActionComplete={handleActionComplete}
         availableTargets={availableTargets}
-        key={`${currentRound}-${currentPlayer.id}`} /* Force re-render on player change */
+        key={`${currentRound}-${currentPlayer.id}`} // This ensures component remounts between rounds
       />
     </div>
   );

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { PlayerRole } from '@/models/GameTypes';
@@ -14,13 +14,20 @@ interface RoleCardProps {
   role: PlayerRole;
   onActionComplete: (targetId: string | null, actionType: 'kill' | 'investigate' | 'heal' | 'none') => void;
   availableTargets: { id: string, name: string }[];
+  key?: string; // This prop helps us force re-renders
 }
 
 export const RoleCard: React.FC<RoleCardProps> = ({ 
-  playerName, role, onActionComplete, availableTargets 
+  playerName, role, onActionComplete, availableTargets, key 
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [showTargetSelection, setShowTargetSelection] = useState(false);
+  
+  // Reset state when the key changes (new player or round)
+  useEffect(() => {
+    setIsFlipped(false);
+    setShowTargetSelection(false);
+  }, [key]);
   
   const handleFlip = () => {
     setIsFlipped(true);

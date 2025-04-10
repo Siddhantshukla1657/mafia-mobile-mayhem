@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 export const NightPhase: React.FC = () => {
   const { state, dispatch } = useGame();
-  const { players, currentPlayerIndex } = state;
+  const { players, currentPlayerIndex, currentRound } = state;
   
   // Get the current player who needs to act
   const currentPlayer = players[currentPlayerIndex];
@@ -51,7 +51,7 @@ export const NightPhase: React.FC = () => {
   return (
     <div>
       <h1 className="text-2xl font-bold text-center text-mafia-primary mb-6">
-        Night Phase - Round {state.currentRound}
+        Night {currentRound} - {currentPlayer.name}'s Turn
       </h1>
       
       <RoleCard 
@@ -59,6 +59,7 @@ export const NightPhase: React.FC = () => {
         role={currentPlayer.role}
         onActionComplete={handleActionComplete}
         availableTargets={availableTargets}
+        key={`${currentRound}-${currentPlayer.id}`} /* Force re-render on player change */
       />
     </div>
   );

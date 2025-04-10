@@ -25,7 +25,7 @@ export const RoleCard: React.FC<RoleCardProps> = ({
   const handleFlip = () => {
     setIsFlipped(true);
     
-    // If villager, no target selection needed
+    // For villager role, complete action after delay
     if (role === 'villager') {
       setTimeout(() => {
         onActionComplete(null, 'none');
@@ -103,10 +103,10 @@ export const RoleCard: React.FC<RoleCardProps> = ({
   return (
     <div className="container mx-auto px-4 py-8 max-w-md flex items-center justify-center min-h-[70vh]">
       {!showTargetSelection ? (
-        <div className={`card-container w-full max-w-xs`}>
+        <div className="card-container w-full max-w-xs perspective-1000">
           <div className={`card ${isFlipped ? 'flipped' : ''}`}>
             <div className="card-front">
-              <Card className="w-full h-80 flex flex-col items-center justify-center bg-mafia-card border-2 border-mafia-primary cursor-pointer shadow-xl" onClick={handleFlip}>
+              <Card className="w-full h-80 flex flex-col items-center justify-center bg-mafia-card border-2 border-mafia-primary cursor-pointer shadow-xl hover:shadow-2xl hover:border-mafia-accent transition-all duration-300" onClick={handleFlip}>
                 <div className="text-center p-6">
                   <h2 className="text-2xl font-bold mb-2">{playerName}'s Turn</h2>
                   <p className="text-mafia-secondary mb-6">Tap to reveal your role</p>

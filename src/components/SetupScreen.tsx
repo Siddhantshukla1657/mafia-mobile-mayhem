@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
@@ -15,7 +14,7 @@ export const SetupScreen: React.FC = () => {
   const [playerNames, setPlayerNames] = useState<string[]>(Array(5).fill(''));
   const [mafiaCount, setMafiaCount] = useState<number>(1);
   const [healerCount, setHealerCount] = useState<number>(1);
-  const [copCount] = useState<number>(1); // Fixed at 1
+  const [copCount, setCopCount] = useState<number>(1); // Now adjustable
 
   const handleNameChange = (index: number, name: string) => {
     const newNames = [...playerNames];
@@ -36,7 +35,34 @@ export const SetupScreen: React.FC = () => {
     
     // Adjust role counts if needed
     if (mafiaCount + healerCount + copCount > count) {
-      setMafiaCount(Math.max(1, count - healerCount - copCount));
+      // Try to keep each role count at least at their minimums
+      const totalSpecialRoles = mafiaCount + healerCount + copCount;
+      const excessRoles = totalSpecialRoles - count;
+      
+      if (excessRoles > 0) {
+        // Reduce roles in this priority: healers first, then mafia, then cops
+        let remainingExcess = excessRoles;
+        
+        // First reduce healers (can go to 0)
+        if (healerCount > 0) {
+          const healerReduction = Math.min(healerCount, remainingExcess);
+          setHealerCount(healerCount - healerReduction);
+          remainingExcess -= healerReduction;
+        }
+        
+        // Next reduce mafia (minimum 1)
+        if (remainingExcess > 0 && mafiaCount > 1) {
+          const mafiaReduction = Math.min(mafiaCount - 1, remainingExcess);
+          setMafiaCount(mafiaCount - mafiaReduction);
+          remainingExcess -= mafiaReduction;
+        }
+        
+        // Finally reduce cops (minimum 1)
+        if (remainingExcess > 0 && copCount > 1) {
+          const copReduction = Math.min(copCount - 1, remainingExcess);
+          setCopCount(copCount - copReduction);
+        }
+      }
     }
   };
 
@@ -48,6 +74,11 @@ export const SetupScreen: React.FC = () => {
   const handleHealerCountChange = (value: number[]) => {
     const count = value[0];
     setHealerCount(count);
+  };
+
+  const handleCopCountChange = (value: number[]) => {
+    const count = value[0];
+    setCopCount(count);
   };
 
   const handleStartGame = () => {
@@ -157,9 +188,15 @@ export const SetupScreen: React.FC = () => {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <Label>Cops: {copCount}</Label>
-                  <span className="text-sm text-mafia-secondary">Fixed</span>
+                  <span className="text-sm text-mafia-secondary">Min: 1</span>
                 </div>
-                <div className="h-2 bg-mafia-primary rounded-full opacity-50"></div>
+                <Slider 
+                  value={[copCount]} 
+                  onValueChange={handleCopCountChange} 
+                  min={1} 
+                  max={Math.max(1, playerCount - mafiaCount - healerCount)} 
+                  step={1} 
+                />
               </div>
 
               <div className="pt-2">

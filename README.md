@@ -8,7 +8,6 @@
 
 - ▶️ **Play Now:** [Mafia Mobile Mayhem](https://mafia-mobile-mayhem.vercel.app/)  
 - 📱 **Download APK:** [Download Mafia Mayhem APK](https://github.com/Siddhantshukla1657/mafia-mobile-mayhem/blob/main/Mafia%20Mobile%20Mayhem.apk)
-)
 
 ## 🚀 Features
 
